@@ -203,6 +203,8 @@ class BankAccountManager:
         self._client = client
         self._requisition_id = requisition_id
         self.accounts = []  # List to hold BankAccount objects
+        self.institution_id = None
+        self.reference = None
 
         # Pass fetch_data to _initialize_accounts
         self._initialize_accounts(fetch_data)
@@ -221,6 +223,9 @@ class BankAccountManager:
             accounts_response = self._client.requisition.get_requisition_by_id(
                 requisition_id=self._requisition_id
             )
+
+            self.institution_id = accounts_response.get("institution_id")
+            self.reference = accounts_response.get("reference")
 
             # Check if the requisition status is expired
             account_status = accounts_response.get("status")
