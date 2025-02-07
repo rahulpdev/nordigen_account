@@ -1,16 +1,11 @@
-from nordigen import NordigenClient
 from typing import Dict, Union, List, Optional, Tuple
 from requests.exceptions import HTTPError
+from nordigen import NordigenClient
 
-class NordigenAPIError(Exception):
-    """Custom exception for errors related to the Nordigen API."""
 
-    def __init__(self, message: str, status_code: Optional[int] = None, response_body: Optional[Dict] = None):
-        super().__init__(message)
-        self.status_code = status_code
-        self.response_body = response_body
-
-def create_nordigen_client(secret_id: str, secret_key: str, refresh_token: Optional[str] = None) -> Tuple[NordigenClient, str]:
+def create_nordigen_client(
+        secret_id: str, secret_key: str, refresh_token: Optional[str] = None
+) -> Tuple[NordigenClient, str]:
     """
     Create and configure a NordigenClient instance using either a refresh token or by generating a new access token.
 
@@ -77,6 +72,17 @@ def create_nordigen_client(secret_id: str, secret_key: str, refresh_token: Optio
         raise NordigenAPIError(
             message=f"Unexpected error obtaining access token: {str(e)}"
         )
+
+
+class NordigenAPIError(Exception):
+    """Custom exception for errors related to the Nordigen API."""
+
+    def __init__(
+            self, message: str, status_code: Optional[int] = None, response_body: Optional[Dict] = None
+    ):
+        super().__init__(message)
+        self.status_code = status_code
+        self.response_body = response_body
 
 
 class BankAccount:

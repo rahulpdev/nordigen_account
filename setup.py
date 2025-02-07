@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="nordigen_account",
-    version="0.3.1",
+    version="0.3.2",
     author="Rahul Parmar",
     author_email="rahulparmaruk@gmail.com",
     description="A Python package to interact with Nordigen API for bank account management.",
